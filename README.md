@@ -1,24 +1,26 @@
-# README
+# COMICwithUS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+登録したユーザーがマンガへのレビューを投稿出来るサイトです。  
+レビューの点数が高いタイトルや閲覧数の多いタイトルはランキングで見ることが出来ます。  
+レビューが参考になればそのレビューに対していいねを送ることができ、参考になったレビューを書いた人達はレビュワーランキングに表示されます。  
+レビューしたいマンガがまだサイトに登録されていなければ、ユーザーが新しくタイトルを登録出来ます。  
+ユーザー登録していない場合は閲覧のみできます。  
 
-Things you may want to cover:
+### サイトテーマ
+マンガのレビューサイト
 
-* Ruby version
+### テーマを選んだ理由
+コロナ状況下で自宅にいる時間が増え以前より多くのマンガを読むようになり、印象に残ったシーンや感想を多くの人と共有したいと感じた為。
 
-* System dependencies
+### ターゲットユーザ
+年齢・性別を問わずマンガが好きな人
 
-* Configuration
+### 主な利用シーン
+自分が読んだマンガの感想や面白かったポイントを誰かと共有したい時・次に読むマンガを探している時・流行のマンガを探している時
 
-* Database creation
+## 設計書
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 機能一覧
+https://docs.google.com/spreadsheets/d/1WeWQiuCuNqv5n04pa_iS_OFR2DVvtObOKy0vfoZICuA/edit?usp=sharing
