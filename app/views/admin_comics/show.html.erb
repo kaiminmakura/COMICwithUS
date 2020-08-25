@@ -1,0 +1,52 @@
+<center>
+<h2>マンガ詳細--管理者</h2>
+</center>
+<div class="container">
+<div class="row">
+<table class="table">
+	<tbody>
+		<tr>
+			<th>作品名</th>
+			<td><%= @comic.title %></td>
+		</tr>
+		<tr>
+			<th>作品名（カナ）</th>
+			<td><%= @comic.title_kana %></td>
+		</tr>
+		<tr>
+			<th>作者</th>
+			<td><%= @comic.author %></td>
+		</tr>
+		<tr>
+			<th>出版社</th>
+			<td><%= @comic.publisher %></td>
+		</tr>
+		<tr>
+			<th>あらすじ</th>
+			<td><%= @comic.story %></td>
+		</tr>
+		<tr>
+			<th>既刊</th>
+			<td><%= @comic.back_number %></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+<li>
+  <%= link_to 'トップページ--管理者', admin_homes_top_path %>
+</li>
+
+<li>
+  <%= link_to 'マンガ一覧--管理者', admin_comics_path %>
+</li>
+
+<% if admin_signed_in? %>
+  <li>
+    <%= link_to 'マンガ編集--管理者', edit_admin_comic_path(@comic.id) %>
+  </li>
+
+  <li>
+    <%= link_to 'マンガ削除--管理者', admin_comic_path(@comic.id), method: :delete %>
+  </li>
+<% end %>

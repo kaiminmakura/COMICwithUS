@@ -1,0 +1,36 @@
+<center>
+<h2>マンガ一覧</h2>
+<%= form_tag(comics_path, :method => 'get') do %>
+  <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
+  <%= submit_tag 'Search', :title_kana => nil %>
+<% end %>
+
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th></th>
+      <th>作品名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @comics.each do |comic| %>
+  <tbody>
+      <td></td>
+      <td>
+        <%= link_to comic_path(comic) do %>
+            <%= comic.title %>
+        <% end %>
+      </td>
+      <td></td>
+  </tbody>
+  <% end %>
+</table>
+</center>
+
+<li>
+  <%= link_to 'トップページ', root_path %>
+</li>
+
+<li>
+  <%= link_to 'マンガ追加', new_comic_path %>
+</li>

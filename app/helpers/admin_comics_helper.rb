@@ -1,0 +1,2 @@
+module AdminComicsHelper
+end
