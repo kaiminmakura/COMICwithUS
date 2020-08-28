@@ -21,11 +21,26 @@
                 <% end %>
                 さん
               </li>
+              <li>
+                <%= link_to 'トップページ', root_path %>
+              </li>
+              <li>
+                <%= link_to 'マンガ一覧', comics_path %>
+              </li>
+              <li>
+                <%= link_to 'マンガ登録', new_comic_path %>
+              </li>
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
           <% elsif admin_signed_in? %>
             <ul>
               <li>管理者</li>
+              <li>
+                <%= link_to 'トップページ--管理者', admin_homes_top_path %>
+              </li>
+              <li>
+                <%= link_to 'マンガ一覧--管理者', admin_comics_path %>
+              </li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
             </ul>
           <% else %>
@@ -34,6 +49,12 @@
               <li><%= link_to "新規登録", new_user_registration_path %></li>
               <li><%= link_to "ログイン", new_user_session_path %></li>
               <li><%= link_to "管理者ログイン（仮）", new_admin_session_path %></li>
+              <li>
+                <%= link_to 'トップページ', root_path %>
+              </li>
+              <li>
+                <%= link_to 'マンガ一覧', comics_path %>
+              </li>
             </ul>
           <% end %>
       </nav>

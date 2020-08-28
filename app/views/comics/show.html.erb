@@ -3,7 +3,7 @@
 </center>
 <div class="container">
 <div class="row">
-<table class="table">
+<table class="table table-striped">
 	<tbody>
 		<tr>
 			<th>作品名</th>
@@ -29,24 +29,77 @@
 			<th>既刊</th>
 			<td><%= @comic.back_number %></td>
 		</tr>
+		<tr>
+			<th>レビュー平均</th>
+			<td class="average-review-rating" data-score=<%= @average_review %>></td>
+			<td>参照レビュー：<%= @comic.reviews.count %> 件</td>
+		</tr>
 	</tbody>
 </table>
 </div>
+<div class="row">
+
+
+	<% @reviews.each do |r| %>
+
+      <div class="review-rating" data-score="<%= r.rank%>"></div>
+	  <%= r.title %>
+	  <%= r.body %>
+	  <%= link_to user_path(r.user) do %>
+	    <%= r.user.name %>
+	  <% end %>
+
+	  <div>
+	  	<% if r.user == current_user || admin_signed_in? %>
+	  	  <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger pull-right" %>
+	  	<% end %>
+	  </div>
+
+	<% end %>
 </div>
-<li>
-  <%= link_to 'トップページ', root_path %>
-</li>
+<div class="row">
+  <% if user_signed_in? %>
 
-<li>
-  <%= link_to 'マンガ一覧', comics_path %>
-</li>
+	<div id=star-rating></div>
+	<%= form_for @review do |f| %>
 
-<li>
-  <%= link_to 'マンガ追加', new_comic_path %>
-</li>
+	  <div id="star"></div>
+	  <%= f.hidden_field :comic_id, value: @comic.id %>
+	  <%= f.hidden_field :user_id, value: @comic.user_id %>
+	  <%= f.text_field :title, class: "text-field" %>
+	  <%= f.text_field :body, class: "text-field" %>
+	  <%= f.submit '投稿', class: "submit-btn" %>
+
+	<% end %>
+  <% end %>
+</div>
+</div>
 
 <% if @comic.user == current_user || admin_signed_in? %>
   <li>
     <%= link_to 'マンガ編集', edit_comic_path(@comic.id) %>
   </li>
 <% end %>
+
+<script>
+  $('.review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    score: function() {
+      return $(this).attr('data-score');
+    },
+  });
+</script>
+
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

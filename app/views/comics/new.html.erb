@@ -1,5 +1,5 @@
 <center>
-<h1>マンガ追加</h1>
+<h1>マンガ登録</h1>
   <%= form_for(@comic) do |f| %>
 
      <h4>作品名</h4>
@@ -23,10 +23,3 @@
      <%= f.submit  'Create Book', class:"btn btn-primary btn-block" %>
   <% end %>
 </center>
-<li>
-  <%= link_to 'トップページ', root_path %>
-</li>
-
-<li>
-  <%= link_to 'マンガ一覧', comics_path %>
-</li>

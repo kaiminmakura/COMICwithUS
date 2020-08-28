@@ -10,7 +10,7 @@
     <tr>
       <th></th>
       <th>作品名</th>
-      <th></th>
+      <th>レビュー平均</th>
     </tr>
   </thead>
   <% @comics.each do |comic| %>
@@ -21,16 +21,20 @@
             <%= comic.title %>
         <% end %>
       </td>
-      <td></td>
+      <td class="average-review-rating" data-score=<%= @average_review %>></td>
   </tbody>
   <% end %>
 </table>
 </center>
 
-<li>
-  <%= link_to 'トップページ', root_path %>
-</li>
-
-<li>
-  <%= link_to 'マンガ追加', new_comic_path %>
-</li>
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

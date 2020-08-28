@@ -1,13 +1,30 @@
-<li>
-  <%= link_to 'トップページ', root_path %>
-</li>
+<div class="row">
 
-<li>
-  <%= link_to 'マンガ一覧', comics_path %>
-</li>
 
-<li>
-  <%= link_to 'マンガ追加', new_comic_path %>
-</li>
+	<% @reviews.each do |r| %>
 
+      <div class="review-rating" data-score="<%= r.rank%>"></div>
+	  <%= r.title %>
+	  <%= r.body %>
+	  <%= link_to comic_path(r.comic) do %>
+	    <%= r.comic.title %>
+	  <% end %>
+
+	  <div>
+	  	<%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger pull-right" %>
+	  </div>
+
+	<% end %>
+</div>
+
+<script>
+  $('.review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    score: function() {
+      return $(this).attr('data-score');
+    },
+  });
+</script>
 <!-- ↓自分のレビューを載せる -->
