@@ -1,0 +1,24 @@
+<div class="container">
+	<h2>ユーザー一覧--管理人</h2>
+  <div class="row">
+  	<table class="table">
+  		<thead>
+  			<tr>
+  				<th></th>
+  			</tr>
+  		</thead>
+  		<% @users.each do |user| %>
+  		<tbody>
+  			<tr>
+  				<td>
+  				  <%= link_to admin_user_path(user) do %>
+  				    <%= user.name %>
+  				  <% end %>
+  			    </td>
+  			</tr>
+  		</tbody>
+  		<% end %>
+  	</table>
+  </div>
+  <%= paginate @users %>
+</div>

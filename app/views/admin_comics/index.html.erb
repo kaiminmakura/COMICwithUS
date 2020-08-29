@@ -1,5 +1,5 @@
 <center>
-<h2>マンガ一覧--管理者</h2>
+<h2>マンガ一覧--管理人</h2>
 <%= form_tag(admin_comics_path, :method => 'get') do %>
   <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
   <%= submit_tag 'Search', :title_kana => nil %>
@@ -10,7 +10,7 @@
     <tr>
       <th></th>
       <th>作品名</th>
-      <th></th>
+      <th>レビュー平均</th>
    	</tr>
  	</thead>
   <% @comics.each do |comic| %>
@@ -21,9 +21,21 @@
             <%= comic.title %>
         <% end %>
       </td>
-      <td></td>
+      <td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
  	</tbody>
   <% end %>
 </table>
+<%= paginate @comics %>
 </center>
 
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

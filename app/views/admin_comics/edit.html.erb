@@ -1,5 +1,5 @@
 <center>
-<h2>マンガ編集--管理者</h2>
+<h2>マンガ編集--管理人</h2>
   <%= form_for(@comic) do |f| %>
 
      <h4>作品名</h4>
@@ -20,7 +20,7 @@
      <h4>既刊</h4>
      <%= f.number_field :back_number %><br>
 
-     <%= f.submit  '更新', class:"btn btn-primary btn-block" %>
+     <%= f.submit  '更新', class:"btn btn-primary" %>
   <% end %>
 </center>
 

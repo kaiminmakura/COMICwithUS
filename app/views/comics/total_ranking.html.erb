@@ -1,0 +1,30 @@
+<table class="table table-striped">
+	  <thead>
+	  	<th>総合ランキング</th>
+	  </thead>
+	<% @comics.each.with_index(1) do |comic, i| %>
+	  <tbody>
+	  	<tr>
+	  		<td><%= i %>位</td>
+  			<td>
+  			  <%= link_to comic_path(comic) do %>
+  				<%= comic.title %>
+  			  <% end %>
+  			</td>
+  			<td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
+  			<td><%= comic.attributes['avg_rank'].round(2) %></td>
+  		</tr>
+	<% end %>
+	  </tbody>
+</table>
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

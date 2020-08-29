@@ -1,4 +1,4 @@
-<center>
+<center class="background-content">
 <h2>マンガ一覧</h2>
 <%= form_tag(comics_path, :method => 'get') do %>
   <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
@@ -21,10 +21,11 @@
             <%= comic.title %>
         <% end %>
       </td>
-      <td class="average-review-rating" data-score=<%= @average_review %>></td>
+      <td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
   </tbody>
   <% end %>
 </table>
+<%= paginate @comics %>
 </center>
 
 <script>

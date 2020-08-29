@@ -7,22 +7,26 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   </head>
 
   <body>
     <header>
-      <nav>
+      <nav class="navbar navbar-default">
+      <div class="container">
+       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">COMICwithUS</a>
+       </div>
+       <div class="collapse navbar-collapse" id="myNavbar">
           <% if user_signed_in? %>
-            <ul>
+            <ul class="nav navbar-nav navbar-right">
               <li>
-                ようこそ
                 <%= link_to user_path(current_user.id) do %>
-                  <%= current_user.name %>
+                  ようこそ<%= current_user.name %>さん
                 <% end %>
-                さん
-              </li>
-              <li>
-                <%= link_to 'トップページ', root_path %>
               </li>
               <li>
                 <%= link_to 'マンガ一覧', comics_path %>
@@ -33,32 +37,35 @@
               <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             </ul>
           <% elsif admin_signed_in? %>
-            <ul>
-              <li>管理者</li>
+            <ul class="nav navbar-nav navbar-right">
+              <li>管理人</li>
               <li>
-                <%= link_to 'トップページ--管理者', admin_homes_top_path %>
+                <%= link_to 'ユーザー一覧--管理人', admin_users_path %>
               </li>
               <li>
-                <%= link_to 'マンガ一覧--管理者', admin_comics_path %>
+                <%= link_to 'マンガ一覧--管理人', admin_comics_path %>
               </li>
               <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
             </ul>
           <% else %>
-            <ul>
+            <ul class="nav navbar-nav navbar-right">
               <li>ゲストユーザー</li>
-              <li><%= link_to "新規登録", new_user_registration_path %></li>
-              <li><%= link_to "ログイン", new_user_session_path %></li>
-              <li><%= link_to "管理者ログイン（仮）", new_admin_session_path %></li>
-              <li>
-                <%= link_to 'トップページ', root_path %>
-              </li>
               <li>
                 <%= link_to 'マンガ一覧', comics_path %>
               </li>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+              <li><%= link_to "新規登録", new_user_registration_path %></li>
+              <li><%= link_to "管理人", new_admin_session_path %></li>
+
             </ul>
           <% end %>
+      </div>
+      </div>
       </nav>
     </header>
     <%= yield %>
+    <footer>
+      <p class="footer-text"> COMICwithUS </p>
+    </footer>
   </body>
 </html>

@@ -2,10 +2,18 @@ class AdminComicsController < ApplicationController
 
   def index
     @comics = Comic.search(params[:search])
+                   .all.page(params[:page]).per(10)
   end
 
   def show
     @comic = Comic.find(params[:id])
+    @user = @comic.user
+    @reviews = @comic.reviews
+    if @comic.reviews.blank?
+      @average_review = 0
+    else
+      @average_review = @comic.reviews.average(:rank).round(2)
+    end
   end
 
   def edit

@@ -10,7 +10,7 @@
 			<td><%= @comic.title %></td>
 		</tr>
 		<tr>
-			<th>作品名（カナ）</th>
+			<th>作品名</br>(カナ)</th>
 			<td><%= @comic.title_kana %></td>
 		</tr>
 		<tr>
@@ -30,44 +30,69 @@
 			<td><%= @comic.back_number %></td>
 		</tr>
 		<tr>
-			<th>レビュー平均</th>
+			<th>レビュー</br>平均</th>
 			<td class="average-review-rating" data-score=<%= @average_review %>></td>
-			<td>参照レビュー：<%= @comic.reviews.count %> 件</td>
 		</tr>
 	</tbody>
 </table>
 </div>
+
 <div class="row">
-
-
+	<table class="table">
+  	<thead>
+  	  <tr>
+  	  	<th></th>
+  	  	<th></th>
+  	  	<th></th>
+  	  	<th></th>
+  	  </tr>
+  	</thead>
 	<% @reviews.each do |r| %>
+	<tbody>
 
-      <div class="review-rating" data-score="<%= r.rank%>"></div>
-	  <%= r.title %>
-	  <%= r.body %>
-	  <%= link_to user_path(r.user) do %>
-	    <%= r.user.name %>
-	  <% end %>
-
-	  <div>
-	  	<% if r.user == current_user || admin_signed_in? %>
-	  	  <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger pull-right" %>
+      <td><div class="review-rating" data-score="<%= r.rank%>"></div></td>
+	  <td><%= r.title %></td>
+	  <td><%= r.body %></td>
+	  <td>
+	  	<%= link_to user_path(r.user) do %>
+	      <%= r.user.name %>
+	    <% end %>
+	  </td>
+	  <% if user_signed_in? %>
+	  <td>
+	  	<% if r.favorited_by?(current_user) %>
+	  	  <%= link_to review_favorites_path(r), method: :delete do %>
+	  	    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+	  	    <%= r.favorites.count %> いいね
+	  	  <% end %>
+	  	<% else %>
+	  	  <%= link_to review_favorites_path(r), method: :post do %>
+	  	    <i class="fa fa-heart" aria-hidden="true" style="color: blue;"></i>
+	  	    <%= r.favorites.count %> いいね
+	  	  <% end %>
 	  	<% end %>
-	  </div>
+	  </td>
+	  <% end %>
+	  <td>
+	  	<% if r.user == current_user || admin_signed_in? %>
+	  	  <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger " %>
+	  	<% end %>
+	  </td>
 
+	</tbody>
 	<% end %>
+	</table>
 </div>
-<div class="row">
-  <% if user_signed_in? %>
 
-	<div id=star-rating></div>
+<div class="row">
+  <% if user_signed_in? && @reviews.find_by(user_id:current_user.id) == nil %>
 	<%= form_for @review do |f| %>
 
 	  <div id="star"></div>
 	  <%= f.hidden_field :comic_id, value: @comic.id %>
-	  <%= f.hidden_field :user_id, value: @comic.user_id %>
+	  <%= f.hidden_field :user_id, value: current_user.id %>
 	  <%= f.text_field :title, class: "text-field" %>
-	  <%= f.text_field :body, class: "text-field" %>
+	  <%= f.text_area :body, class: "text-area" %>
 	  <%= f.submit '投稿', class: "submit-btn" %>
 
 	<% end %>
@@ -75,11 +100,11 @@
 </div>
 </div>
 
+<center>
 <% if @comic.user == current_user || admin_signed_in? %>
-  <li>
-    <%= link_to 'マンガ編集', edit_comic_path(@comic.id) %>
-  </li>
+    <%= link_to 'マンガ編集', edit_comic_path(@comic.id), class: "btn btn-success " %>
 <% end %>
+</center>
 
 <script>
   $('.review-rating').raty({

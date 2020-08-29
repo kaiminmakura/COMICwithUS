@@ -6,5 +6,6 @@ class User < ApplicationRecord
 
   has_many :comics
   has_many :reviews
+  has_many :favorites, dependent: :destroy
 
 end

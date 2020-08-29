@@ -1,7 +1,12 @@
 <center>
-<h1>マンガ登録</h1>
+<div class="container">
+  <div class="row">
+    <h1>マンガ登録</h1>
+  </div>
+
   <%= form_for(@comic) do |f| %>
 
+    <div class="row">
      <h4>作品名</h4>
      <%= f.text_field :title %>
 
@@ -19,7 +24,11 @@
 
      <h4>既刊</h4>
      <%= f.number_field :back_number %><br>
+    </div>
 
-     <%= f.submit  'Create Book', class:"btn btn-primary btn-block" %>
+    <div class="row">
+     <%= f.submit  '新規登録', class:"btn btn-primary" %>
+    </div>
   <% end %>
 </center>
+</div>
