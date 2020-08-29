@@ -66,3 +66,7 @@ gem 'jquery-rails'
 gem 'ratyrate'
 gem 'pry-rails'
 gem 'kaminari'
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
