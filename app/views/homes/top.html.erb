@@ -4,7 +4,7 @@
 	<title>COMICwithUS</title>
 </head>
 <body>
-	<center>
+	<div class="center">
 	  <div class="background">
 	  	<div class="fukidasi">
 		  <%= image_tag 'comic7.png' %>
@@ -12,46 +12,46 @@
 		  <%= image_tag 'comic9.png' %>
 	    </div>
 	  </div>
-	</center>
+	</div>
 
 	<table class="table table-striped">
 	  <thead>
-	  	<th>総合ランキング</th>
-	  </thead>
-	<% @comics.each.with_index(1) do |comic, i| %>
-	  <tbody>
 	  	<tr>
-	  		<td><%= i %>位</td>
-  			<td><%= comic.title %></td>
-  			<td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
-  			<td><%= comic.attributes['avg_rank'].round(2) %></td>
+	  	  <th>総合ランキング</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <% @comics.each.with_index(1) do |comic, i| %>
+	  	<tr>
+	  	  <td><%= i %>位</td>
+  		  <td><%= comic.title %></td>
+  		  <td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
+  		  <td><%= comic.attributes['avg_rank'].round(2) %></td>
   		</tr>
-	<% end %>
-		<tr>
-			<td><%= link_to 'もっと見る>>', comics_total_ranking_path %></td>
-		</tr>
+	  <% end %>
 	  </tbody>
-	</table>
+    </table>
+	<p><%= link_to 'もっと見る>>', comics_total_ranking_path %></p>
 	<table class="table table-striped">
 	  <thead>
-	    <th>レビュワーランキング</th>
+	  	<tr>
+	      <th>レビュワーランキング</th>
+	    </tr>
 	  </thead>
-	<% @all_ranks.each.with_index(1) do |user, i| %>
 	  <tbody>
+	  <% @all_ranks.each.with_index(1) do |user, i| %>
 	    <tr>
-	   		<td><%= i %>位</td>
-  			<td>
-  		  		<%= link_to user_path(user) do %>
-  		    		<%= user.name %>
-  		  		<% end %>
-  			</td>
+	   	  <td><%= i %>位</td>
+  		  <td>
+  		    <%= link_to user_path(user) do %>
+  		      <%= user.name %>
+  		  	<% end %>
+  		  </td>
   	  	</tr>
-	<% end %>
-		<tr>
-			<td><%= link_to 'もっと見る>>', users_reviewer_ranking_path %></td>
-		</tr>
+	  <% end %>
 	  </tbody>
 	</table>
+    <P><%= link_to 'もっと見る>>', users_reviewer_ranking_path %></P>
 </body>
 </html>
 <script>

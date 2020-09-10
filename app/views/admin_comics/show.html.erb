@@ -1,85 +1,82 @@
-<center>
-<h2>マンガ詳細--管理人</h2>
-</center>
 <div class="container">
-<div class="row">
-<table class="table table-striped">
-	<tbody>
-		<tr>
-			<th>作品名</th>
-			<td><%= @comic.title %></td>
-		</tr>
-		<tr>
-			<th>作品名</br>(カナ)</th>
-			<td><%= @comic.title_kana %></td>
-		</tr>
-		<tr>
-			<th>作者</th>
-			<td><%= @comic.author %></td>
-		</tr>
-		<tr>
-			<th>出版社</th>
-			<td><%= @comic.publisher %></td>
-		</tr>
-		<tr>
-			<th>あらすじ</th>
-			<td><%= @comic.story %></td>
-		</tr>
-		<tr>
-			<th>既刊</th>
-			<td><%= @comic.back_number %></td>
-		</tr>
-		<tr>
-			<th>レビュー</br>平均</th>
-			<td class="average-review-rating" data-score=<%= @average_review %>></td>
-		</tr>
-	</tbody>
-</table>
-</div>
-<div class="row">
-	<table class="table">
-  	<thead>
-  	  <tr>
-  	  	<th></th>
-  	  	<th></th>
-  	  	<th></th>
-  	  	<th></th>
-  	  </tr>
-  	</thead>
-	<% @reviews.each do |r| %>
-	<tbody>
-
-      <td><div class="review-rating" data-score="<%= r.rank%>"></div></td>
-	  <td><%= r.title %></td>
-	  <td><%= r.body %></td>
-	  <td>
-	  	<%= link_to admin_user_path(r.user) do %>
-	      <%= r.user.name %>
-	    <% end %>
-	  </td>
-
-	  <td>
-	  	<% if r.user == current_user || admin_signed_in? %>
-	  	  <%= link_to "削除", admin_review_path(r.id), method: :delete, class: "btn btn-danger " %>
-	  	<% end %>
-	  </td>
-
-	</tbody>
-	<% end %>
-	</table>
-
-</div>
-</div>
-
-<center>
-<% if admin_signed_in? %>
-  <div class="btn-group">
-    <%= link_to 'マンガ編集', edit_admin_comic_path(@comic.id), class: "btn btn-success " %>
-
-    <%= link_to 'マンガ削除', admin_comic_path(@comic.id), method: :delete, class: "btn btn-danger " %>
+  <div class="center">
+	<h2>マンガ詳細--管理人</h2>
   </div>
-<% end %>
-</center>
+  <div class="row">
+    <table class="table table-striped">
+	  <tbody>
+	    <tr>
+		  <th>作品名</th>
+		  <td><%= @comic.title %></td>
+		</tr>
+		<tr>
+		  <th>作品名<br />(カナ)</th>
+		  <td><%= @comic.title_kana %></td>
+		</tr>
+		<tr>
+		  <th>作者</th>
+		  <td><%= @comic.author %></td>
+		</tr>
+		<tr>
+		  <th>出版社</th>
+		  <td><%= @comic.publisher %></td>
+		</tr>
+		<tr>
+		  <th>あらすじ</th>
+		  <td><%= @comic.story %></td>
+		</tr>
+		<tr>
+		  <th>既刊</th>
+		  <td><%= @comic.back_number %></td>
+		</tr>
+		<tr>
+		  <th>レビュー<br />平均</th>
+		  <td class="average-review-rating" data-score=<%= @average_review %>></td>
+		</tr>
+	  </tbody>
+    </table>
+  </div>
+  <div class="row">
+	<table class="table">
+  	  <thead>
+  	    <tr>
+  	  	  <th></th>
+  	  	  <th></th>
+  	  	  <th></th>
+  	  	  <th></th>
+  	    </tr>
+  	  </thead>
+	  <% @reviews.each do |r| %>
+	  <tbody>
+	    <tr>
+          <td><div class="review-rating" data-score="<%= r.rank%>"></div></td>
+	      <td><%= r.title %></td>
+	  	  <td><%= r.body %></td>
+	  	  <td>
+	  	    <%= link_to admin_user_path(r.user) do %>
+	          <%= r.user.name %>
+	        <% end %>
+	      </td>
+	      <td>
+	  	    <% if r.user == current_user || admin_signed_in? %>
+	  	      <%= link_to "削除", admin_review_path(r.id), method: :delete, class: "btn btn-danger " %>
+	  	    <% end %>
+	      </td>
+	    </tr>
+	  </tbody>
+	  <% end %>
+	</table>
+  </div>
+
+  <div class="center">
+    <% if admin_signed_in? %>
+      <div class="btn-group">
+        <%= link_to 'マンガ編集', edit_admin_comic_path(@comic.id), class: "btn btn-success " %>
+        <%= link_to 'マンガ削除', admin_comic_path(@comic.id), method: :delete, class: "btn btn-danger " %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <script>
   $('.review-rating').raty({

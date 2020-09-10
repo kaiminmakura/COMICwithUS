@@ -1,45 +1,46 @@
 <div class="container">
   <div class="row">
-  <div class="col-lg-12">
-	<h2><%= @user.name %>さんのレビュー一覧</h2>
-  <table class="table">
-  	<thead>
-  	  <tr>
-  	  	<th></th>
-  	  	<th></th>
-  	  	<th>レビューコメント</th>
-  	  	<th></th>
-  	  	<th>作品名</th>
-  	  </tr>
-  	</thead>
-	<% @reviews.each do |r| %>
-	<tbody>
-	  <td><div class="review-rating" data-score="<%= r.rank%>"></div></td>
-	  <td><%= r.title %></td>
-	  <td><%= r.body %></td>
-    <td>
-      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-      <%= r.favorites.count %>
-    </td>
-	  <td>
-	    <%= link_to comic_path(r.comic) do %>
-	      <%= r.comic.title %>
-	    <% end %>
-	  </td>
-	  
-	  <% if r.user == current_user || admin_signed_in? %>
-	  <td>
-	  	<%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger pull-right" %>
-	  </td>
-	  <% end %>
+    <div class="col-lg-12">
+    <div class="center">
+	    <h2><%= @user.name %>さんのレビュー一覧</h2>
+      <table class="table">
+  	    <thead>
+  	      <tr>
+  	  	    <th></th>
+  	  	    <th></th>
+  	  	    <th>レビューコメント</th>
+  	  	    <th></th>
+  	  	    <th>作品名</th>
+  	      </tr>
+  	    </thead>
+	      <% @reviews.each do |r| %>
+	      <tbody>
+          <tr>
+	          <td><div class="review-rating" data-score="<%= r.rank%>"></div></td>
+	          <td><%= r.title %></td>
+	          <td><%= r.body %></td>
+            <td>
+              <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+              <%= r.favorites.count %>
+            </td>
+	          <td>
+	            <%= link_to comic_path(r.comic) do %>
+	              <%= r.comic.title %>
+	            <% end %>
+	          </td>
 
-	<% end %>
-    </tbody>
-  </table>
-  <center>
-    <%= paginate @reviews %>
-  </center>
-  </div>
+	          <% if r.user == current_user || admin_signed_in? %>
+	          <td>
+	  	        <%= link_to "削除", review_path(r.id), method: :delete, class: "btn btn-danger pull-right" %>
+	          </td>
+	          <% end %>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+      <%= paginate @reviews %>
+    </div>
+    </div>
   </div>
 </div>
 

@@ -1,34 +1,30 @@
-<center>
 <div class="container">
+  <div class="center">
   <div class="row">
     <h1>マンガ登録</h1>
   </div>
+  <div class="row">
+    <%= form_for(@comic) do |f| %>
+      <h4>作品名</h4>
+      <%= f.text_field :title %>
 
-  <%= form_for(@comic) do |f| %>
+      <h4>作品名（カナ）</h4>
+      <%= f.text_field :title_kana %>
 
-    <div class="row">
-     <h4>作品名</h4>
-     <%= f.text_field :title %>
+      <h4>作者</h4>
+      <%= f.text_field :author %>
 
-     <h4>作品名（カナ）</h4>
-     <%= f.text_field :title_kana %>
+      <h4>出版社</h4>
+      <%= f.text_field :publisher %>
 
-     <h4>作者</h4>
-     <%= f.text_field :author %>
+      <h4>あらすじ</h4>
+      <%= f.text_area :story %>
 
-     <h4>出版社</h4>
-     <%= f.text_field :publisher %>
+      <h4>既刊</h4>
+      <%= f.number_field :back_number %><br>
 
-     <h4>あらすじ</h4>
-     <%= f.text_area :story %>
-
-     <h4>既刊</h4>
-     <%= f.number_field :back_number %><br>
-    </div>
-
-    <div class="row">
-     <%= f.submit  '新規登録', class:"btn btn-primary" %>
-    </div>
-  <% end %>
-</center>
+      <%= f.submit  '新規登録', class:"btn btn-primary" %>
+    <% end %>
+  </div>
+  </div>
 </div>

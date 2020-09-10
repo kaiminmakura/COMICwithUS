@@ -1,32 +1,39 @@
-<center>
-<h2>マンガ一覧--管理人</h2>
-<%= form_tag(admin_comics_path, :method => 'get') do %>
-  <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
-  <%= submit_tag 'Search', :title_kana => nil %>
-<% end %>
-
-<table class="table table-hover table-inverse">
-  <thead>
-    <tr>
-      <th></th>
-      <th>作品名</th>
-      <th>レビュー平均</th>
-   	</tr>
- 	</thead>
-  <% @comics.each do |comic| %>
-  <tbody>
-      <td></td>
-      <td>
-        <%= link_to admin_comic_path(comic) do %>
-            <%= comic.title %>
-        <% end %>
-      </td>
-      <td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
- 	</tbody>
-  <% end %>
-</table>
-<%= paginate @comics %>
-</center>
+<div class="container">
+  <div class="center">
+  <div class="row">
+    <h2>マンガ一覧--管理人</h2>
+    <%= form_tag(admin_comics_path, :method => 'get') do %>
+      <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
+      <%= submit_tag 'Search', :title_kana => nil %>
+    <% end %>
+  </div>
+  <div class="row">
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>作品名</th>
+          <th>レビュー平均</th>
+   	    </tr>
+ 	    </thead>
+      <% @comics.each do |comic| %>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <%= link_to admin_comic_path(comic) do %>
+              <%= comic.title %>
+            <% end %>
+          </td>
+          <td class="average-review-rating" data-score="<%= comic.reviews.average(:rank) %>"></td>
+        </tr>
+ 	    </tbody>
+      <% end %>
+    </table>
+    <%= paginate @comics %>
+  </div>
+  </div>
+</div>
 
 <script>
   $('.average-review-rating').raty({
