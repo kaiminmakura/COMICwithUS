@@ -12,7 +12,7 @@ class Comic < ApplicationRecord
 
 	def self.search(search)
 		if search
-			Comic.where(['title_kana LIKE ?', "%#{search}%"])
+			Comic.where(['title LIKE ? OR title_kana LIKE ? OR author LIKE ? OR publisher LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"])
 		else
 			Comic.all
 		end

@@ -3,7 +3,7 @@
   <div class="row">
     <h2>マンガ一覧</h2>
     <%= form_tag(comics_path, :method => 'get') do %>
-      <%= text_field_tag "search", "", :placeholder =>"作品名:カタカナ" %>
+      <%= text_field_tag "search", "", :placeholder =>"作品名・著者名・出版社" %>
       <%= submit_tag 'Search', :title_kana => nil %>
     <% end %>
   </div>
