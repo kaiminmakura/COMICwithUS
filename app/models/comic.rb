@@ -2,6 +2,8 @@ class Comic < ApplicationRecord
 
 	belongs_to :user
 	has_many :reviews
+	has_many :tag_maps, dependent: :destroy
+	has_many :tags, through: :tag_maps
 
 	validates :title, presence: true, uniqueness: true
 	validates :title_kana, presence: true, uniqueness: true, format: { with: /\A[ァ-ヶー－]+\z/}
