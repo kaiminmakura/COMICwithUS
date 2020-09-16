@@ -7,7 +7,9 @@ class ComicsController < ApplicationController
   def create
   	@comic = Comic.new(comic_params)
     @comic.user_id = current_user.id
+    tag_list params[:comic][:tag_name].split(nil)
   	if @comic.save
+       @comic.save_tag(tag_list)
   	   redirect_to comic_path(@comic.id)
     else
        render :new
@@ -17,6 +19,7 @@ class ComicsController < ApplicationController
   def index
   	@comics = Comic.search(params[:search])
                    .all.page(params[:page]).per(10)
+    @tag_list = Tag.all
   end
 
   def show
@@ -24,6 +27,7 @@ class ComicsController < ApplicationController
     @user = @comic.user
     @review = Review.new
     @reviews = @comic.reviews
+    @comic_tags = @comic.tags
     if @comic.reviews.blank?
       @average_review = 0
     else

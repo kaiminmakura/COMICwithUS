@@ -19,4 +19,19 @@ class Comic < ApplicationRecord
 			Comic.all
 		end
 	end
+
+	def save_tag(sent_tags)
+		current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
+		old_tags = current_tags - sent_tags
+		new_tags = sent_tags - current_tags
+
+		old_tags.each do |old|
+		  self.comic_tags.delete ComicTag.find_by(comic_tag_name: old)
+		end
+
+		new_tags.each do |new|
+		  new_comic_tag = ComicTag.find_or_create_by(comic_tag_name: new)
+		  self.comic_tags << new_comic_tag
+		end
+	end
 end
