@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_123234) do
+ActiveRecord::Schema.define(version: 2020_09_19_064526) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -54,11 +54,11 @@ ActiveRecord::Schema.define(version: 2020_09_05_123234) do
   end
 
   create_table "tag_maps", force: :cascade do |t|
-    t.integer "post_id"
+    t.integer "comic_id"
     t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_tag_maps_on_post_id"
+    t.index ["comic_id"], name: "index_tag_maps_on_comic_id"
     t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
   end
 

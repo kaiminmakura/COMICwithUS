@@ -1,13 +1,14 @@
 class ComicsController < ApplicationController
 
   def new
-  	@comic = Comic.new
+  	@comic = current_user.comics.new
+    @tag_list = Tag.all
   end
 
   def create
   	@comic = Comic.new(comic_params)
     @comic.user_id = current_user.id
-    tag_list params[:comic][:tag_name].split(nil)
+    tag_list = params[:comic][:tag_name].split(nil)
   	if @comic.save
        @comic.save_tag(tag_list)
   	   redirect_to comic_path(@comic.id)

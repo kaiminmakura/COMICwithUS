@@ -26,11 +26,11 @@ class Comic < ApplicationRecord
 		new_tags = sent_tags - current_tags
 
 		old_tags.each do |old|
-		  self.comic_tags.delete ComicTag.find_by(comic_tag_name: old)
+		  self.comic_tags.delete Tag.find_by(comic_tag_name: old)
 		end
 
 		new_tags.each do |new|
-		  new_comic_tag = ComicTag.find_or_create_by(comic_tag_name: new)
+		  new_comic_tag = Tag.find_or_create_by(comic_tag_name: new)
 		  self.comic_tags << new_comic_tag
 		end
 	end

@@ -37,6 +37,12 @@
     </table>
   </div>
   <div class="row">
+  	<% @comic_tags.each do |tag| %>
+  	  <%= link_to tag.tag_name, tag_comics_path(tag_id: tag.id) %>
+  	  <%= tag.comics.count %>
+  	<% end %>
+  </div>
+  <div class="row">
     <table class="table">
   	  <thead>
   	    <tr>

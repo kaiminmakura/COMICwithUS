@@ -4,7 +4,7 @@
     <h1>マンガ登録</h1>
   </div>
   <div class="row">
-    <%= form_for(@comic) do |f| %>
+    <%= form_with(model: @comic, url: comics_path, local: true) do |f| %>
       <h4>作品名</h4>
       <%= f.text_field :title %>
 
@@ -21,9 +21,20 @@
       <%= f.text_area :story %>
 
       <h4>既刊</h4>
-      <%= f.number_field :back_number %><br>
+      <%= f.number_field :back_number %>
+
+      <h4>タグ</h4>
+      <p>スペースを入力することで複数のタグを付けることができます</p>
+      <p>例：少年　バトル</p>
+      <%= f.text_field :tag_name %><br />
 
       <%= f.submit  '新規登録', class:"btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @tag_list.each do |list| %>
+      <%= link_to list.tag_name, tag_comics_path(tag_id: list.id) %>
+      <%= list.comics.count %>
     <% end %>
   </div>
   </div>

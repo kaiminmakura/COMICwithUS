@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   resources :comics, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   resources :admin_comics, only: [:new, :create, :index, :show, :edit, :update, :destroy]
 
+  resources :tags do
+    get 'comics', to: 'comics#search'
+  end
+
   get 'users/reviewer_ranking'
   resources :users, only: [:show]
   resources :admin_users, only: [:index, :show]
