@@ -23,10 +23,12 @@
       <h4>既刊</h4>
       <%= f.number_field :back_number %>
 
+<!-- タグ表示ここから -->
       <h4>タグ</h4>
       <p>スペースを入力することで複数のタグを付けることができます</p>
       <p>例：少年　バトル</p>
       <%= f.text_field :tag_name %><br />
+<!-- ここまで -->
 
       <%= f.submit  '新規登録', class:"btn btn-primary" %>
     <% end %>
